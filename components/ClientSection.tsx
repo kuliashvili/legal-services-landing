@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { MotionValue } from "framer-motion";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -126,8 +127,8 @@ export default function ClientSection() {
         >
           <span
             className="block text-center"
-            style={{ ...textStyles, clipPath: "inset(0 0 50% 0)" }}
-          >
+            style={{ ...textStyles, clipPath: "inset(0 0 50% 0)" } as React.CSSProperties}
+            >
             CLIENTS
           </span>
         </motion.div>
@@ -142,7 +143,7 @@ export default function ClientSection() {
         >
           <span
             className="block text-center"
-            style={{ ...textStyles, clipPath: "inset(50% 0 0 0)" }}
+            style={{ ...textStyles, clipPath: "inset(50% 0 0 0)" } as React.CSSProperties }
           >
             CLIENTS
           </span>
@@ -167,7 +168,7 @@ export default function ClientSection() {
                 : windowWidth >= 768
                 ? "0.42"
                 : "0.6",
-          }}
+          } as React.CSSProperties }
         >
           <div className="flex flex-col gap-[9px]">
             <motion.div
