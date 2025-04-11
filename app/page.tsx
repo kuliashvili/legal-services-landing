@@ -1,103 +1,68 @@
+"use client";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import backgroundImage from "../public/background_icon.svg";
+import circle from "../public/circle.svg";
+import arrow from "../public/arrow.svg";
 import Image from "next/image";
+import ClientSection from "@/components/ClientSection";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const ref = useRef(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const yText = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const ySubText = useTransform(scrollYProgress, [0, 1], [0, -500]);
+  const yArrow = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
+  return (
+    <main ref={ref} className="bg-black text-white  relative overflow-hidden">
+      <Image
+        className="absolute right-[-350px] top-[350px] min-w-[762px] md:w-[70%] z-0 md:top-[150px] md:right-[-50px]"
+        width={1400}
+        height={850}
+        src={backgroundImage}
+        alt="Background Icon"
+      />
+
+      <div className="max-w-[1920px] h-[844px] md:h-[1080px] mx-auto px-3 md:px-6 flex flex-col items-start justify-center text-left relative">
+        <motion.div style={{ y: ySubText }} className="relative z-10">
+          <div className="flex justify-center items-center gap-[10px]">
+            <Image src={circle} width={6} height={6} alt="Circle Icon" />
+            <span className="font-helvetica text-[16px] font-light uppercase tracking-normal">
+              Clients
+            </span>
+          </div>
+        </motion.div>
+
+        <motion.div
+          style={{ y: yText }}
+          className="relative z-10 mt-[8px] mb-[100px] md:mb-[0]"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <h1 className="font-justice text-[48px] md:text-6xl lg:text-8xl xl:text-[120px] uppercase leading-[100%] tracking-normal w-[90%] bg-[#3D3801] text-white inline">
+            Dedicated to protecting your rights and achieving your legal goals
+          </h1>
+        </motion.div>
+
+        <motion.div
+          style={{ y: yArrow }}
+          className="absolute bottom-[82px] left-[-10px] flex justify-center items-center z-10 transform rotate-90 gap-[10px]"
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <span className="font-helvetica text-[16px] font-light">
+            Scroll Down
+          </span>
+          <Image src={arrow} width={19} height={13} alt="Arrow Icon" />
+        </motion.div>
+      </div>
+
+      <div className="max-w-[1920px] h-[844px] md:h-[1080px] mx-auto px-3 md:px-0 flex flex-col items-center justify-center text-center">
+        <ClientSection />
+      </div>
+      <div className="max-w-[1920px] h-[200px] md:h-[200px] mx-auto px-3 md:px-6"></div>
+    </main>
   );
 }
